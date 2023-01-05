@@ -20,8 +20,8 @@ public class EnderecoService {
     private PessoaRepository pessoaRepository;
 
     @Transactional
-    public Endereco insertEndereco(Integer idPessoa, NewEnderecoDto dto){
-        Pessoa pessoa = pessoaRepository.findById(idPessoa).orElseThrow();
+    public Endereco insertEndereco(Integer pessoaId, NewEnderecoDto dto) {
+        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow();
 
         Endereco endereco = new Endereco(dto.getLogradouro(), dto.getCep(),
                 dto.getNumero(), dto.getCidade(), List.of(pessoa));
@@ -30,5 +30,21 @@ public class EnderecoService {
         endereco = enderecoRepository.save(endereco);
         pessoaRepository.saveAll(endereco.getPessoas());
         return endereco;
+    }
+
+    public List<Endereco> listAllEnderecoByPessoa(Integer pessoaId) {
+        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow();
+        return pessoa.getEnderecos();
+    }
+
+    public Endereco findMainEnderecoByPessoa(Integer pessoaId) {
+        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow();
+
+        //todo: A regra de negocio é que o primeiro Endereco sempre será o principal endereco da pessoa.
+        if (pessoa.getEnderecos().size() == 0) {
+            throw new IllegalArgumentException("Esse cliente não possui enderecos!", new IllegalArgumentException());
+        } else {
+            return pessoa.getEnderecos().get(0);
+        }
     }
 }
