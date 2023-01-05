@@ -22,25 +22,28 @@ public class EnderecoService {
 
     @Transactional
     public Endereco insertEndereco(Integer pessoaId, NewEnderecoDto dto) {
-        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow();
+        //Buscar a pessoa pelo Id no metodo privado da classe
+        Pessoa pessoa = findPessoaById(pessoaId);
 
+        //Criar endereco a partir do construtor
         Endereco endereco = new Endereco(dto.getLogradouro(), dto.getCep(),
                 dto.getNumero(), dto.getCidade(), List.of(pessoa));
+        //adicionar o novo endereco à pessoa
         pessoa.getEnderecos().add(endereco);
 
+        //salvar o endereco e depois salvar a pessoa de acordo com seu endereco
         endereco = enderecoRepository.save(endereco);
         pessoaRepository.saveAll(endereco.getPessoas());
         return endereco;
     }
 
     public List<Endereco> listAllEnderecoByPessoa(Integer pessoaId) {
-        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow();
-        return pessoa.getEnderecos();
+        //Retorna apenas os enderecos da pessoa buscada pelo Id.
+        return findPessoaById(pessoaId).getEnderecos();
     }
-
-    public Endereco defineMainEnderecoByPessoa(Integer pessoaId, Integer enderecoId) {
-        //Pego a pessoa pelo id passado no paramentro, se não existir é lançada uma exception.
-        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElseThrow();
+    public void defineMainEnderecoByPessoa(Integer pessoaId, Integer enderecoId) {
+        //Pego a pessoa pelo Id passado no paramentro com o metodo privado da classe
+        Pessoa pessoa = findPessoaById(pessoaId);
 
         //Percorrer a lista de enderecos para ver se já tem um endereco Principal.
         for (Endereco endereco : pessoa.getEnderecos()) {
@@ -50,12 +53,17 @@ public class EnderecoService {
             }
         }
 
-        //Pego o endereco pelo id passado no paramentro, se não existir é lançada uma exception.
+        //Pego o endereco pelo Id passado no paramentro, se não existir é lançada uma exception.
         Endereco endereco = enderecoRepository.findById(enderecoId).orElseThrow(
                 () -> new IllegalArgumentException("Endereco não existe!"));
 
         //E modifico o endereco passado para principal.
         endereco.setTipoEndereco(TipoEndereco.PRINCIPAL);
-        return enderecoRepository.save(endereco);
+        enderecoRepository.save(endereco);
+    }
+
+    private Pessoa findPessoaById(Integer id){
+        return pessoaRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("Não existe pessoa com esse Id: "+ id));
     }
 }

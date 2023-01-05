@@ -13,6 +13,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "pessoa")
 public class Pessoa implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
     @Id
@@ -26,7 +27,8 @@ public class Pessoa implements Serializable {
     @JoinColumn(name = "enderecos")
     private List<Endereco> enderecos = new ArrayList<>();
 
-    public Pessoa(){}
+    public Pessoa() {
+    }
 
     public Pessoa(String nome, LocalDate dataNascimento) {
         this.nome = nome;

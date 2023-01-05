@@ -32,7 +32,7 @@ public class EnderecoController {
     }
 
     @PatchMapping("main/{pessoaId}/{enderecoId}")
-    public ResponseEntity<Endereco> defineMainEnderecoByPessoa(@PathVariable Integer pessoaId,
+    public ResponseEntity<Void> defineMainEnderecoByPessoa(@PathVariable Integer pessoaId,
                                                                @PathVariable Integer enderecoId){
         service.defineMainEnderecoByPessoa(pessoaId, enderecoId);
         return ResponseEntity.noContent().build();
