@@ -31,9 +31,10 @@ public class EnderecoController {
         return ResponseEntity.created(uri).build();
     }
 
-    @GetMapping("main/bypessoas/{pessoaId}")
-    public ResponseEntity<Endereco> findMainEnderecoByPessoa(@PathVariable Integer pessoaId){
-        Endereco mainEndereco = service.findMainEnderecoByPessoa(pessoaId);
-        return ResponseEntity.ok().body(mainEndereco);
+    @PatchMapping("main/{pessoaId}/{enderecoId}")
+    public ResponseEntity<Endereco> defineMainEnderecoByPessoa(@PathVariable Integer pessoaId,
+                                                               @PathVariable Integer enderecoId){
+        service.defineMainEnderecoByPessoa(pessoaId, enderecoId);
+        return ResponseEntity.noContent().build();
     }
 }

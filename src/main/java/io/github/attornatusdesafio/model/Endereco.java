@@ -2,6 +2,7 @@ package io.github.attornatusdesafio.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.github.attornatusdesafio.enums.TipoEndereco;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -25,14 +26,18 @@ public class Endereco implements Serializable {
     private String numero;
     private String cidade;
 
+    private TipoEndereco tipoEndereco;
+
     @JsonIgnore
     @ManyToMany(mappedBy = "enderecos")
     private List<Pessoa> pessoas = new ArrayList<>();
 
     public Endereco() {
+        this.tipoEndereco = TipoEndereco.SECUNDARIO;
     }
 
     public Endereco(String logradouro, String cep, String numero, String cidade, List<Pessoa> pessoas) {
+        this.tipoEndereco = TipoEndereco.SECUNDARIO;
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
@@ -78,6 +83,14 @@ public class Endereco implements Serializable {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public TipoEndereco getTipoEndereco() {
+        return tipoEndereco;
+    }
+
+    public void setTipoEndereco(TipoEndereco tipoEndereco) {
+        this.tipoEndereco = tipoEndereco;
     }
 
     public List<Pessoa> getPessoas() {
