@@ -14,7 +14,4 @@ public class CreatePessoaTest {
         return new Pessoa(1, "Guilherme", LocalDate.now());
     }
 
-    public static Pessoa pessoaToBeUpdate(){
-        return new Pessoa(1, "Monalisa", LocalDate.now());
-    }
 }
