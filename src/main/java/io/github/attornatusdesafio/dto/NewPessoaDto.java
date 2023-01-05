@@ -1,10 +1,13 @@
 package io.github.attornatusdesafio.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 public class NewPessoaDto {
 
     private String nome;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataNascimento;
 
     public String getNome() {

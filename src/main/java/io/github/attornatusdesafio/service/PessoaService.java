@@ -23,9 +23,9 @@ public class PessoaService {
         return pessoaRepository.findAll();
     }
 
-    public void insert(NewPessoaDto dto){
+    public Pessoa insert(NewPessoaDto dto){
         Pessoa pessoa = new Pessoa(dto.getNome(), dto.getDataNascimento());
-        pessoaRepository.save(pessoa);
+        return pessoaRepository.save(pessoa);
     }
 
     public void update(Integer id, UpdatePessoaDto dto){
