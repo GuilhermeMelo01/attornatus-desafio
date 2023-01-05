@@ -1,6 +1,7 @@
 package io.github.attornatusdesafio.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serial;
@@ -24,10 +25,19 @@ public class Endereco implements Serializable {
     private String numero;
     private String cidade;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "enderecos")
     private List<Pessoa> pessoas = new ArrayList<>();
 
     public Endereco() {
+    }
+
+    public Endereco(String logradouro, String cep, String numero, String cidade, List<Pessoa> pessoas) {
+        this.logradouro = logradouro;
+        this.cep = cep;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.pessoas = pessoas;
     }
 
     public Integer getId() {
@@ -68,6 +78,14 @@ public class Endereco implements Serializable {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
     }
 
     @Override
