@@ -15,14 +15,14 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    //Busca uma pesssoa a partir do seu Id.
-    public Pessoa findById(Integer id){
-        return pessoaRepository.findById(id).orElseThrow();
-    }
-
     //Lista todas as pessoas com os seus enderecos.
     public List<Pessoa> listAll(){
         return pessoaRepository.findAll();
+    }
+
+    //Busca uma pesssoa a partir do seu Id.
+    public Pessoa findById(Integer id){
+        return pessoaRepository.findById(id).orElseThrow();
     }
 
     //Insere uma nova pessoa a partir do Dto (Data Transfer Object)

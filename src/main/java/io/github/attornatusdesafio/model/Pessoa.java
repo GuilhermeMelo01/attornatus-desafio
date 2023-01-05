@@ -35,6 +35,12 @@ public class Pessoa implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
+    public Pessoa(Integer id, String nome, LocalDate dataNascimento) {
+        this.id = id;
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+    }
+
     public Integer getId() {
         return id;
     }

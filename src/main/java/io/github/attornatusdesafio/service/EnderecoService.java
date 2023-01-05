@@ -31,7 +31,7 @@ public class EnderecoService {
         //adicionar o novo endereco à pessoa
         pessoa.getEnderecos().add(endereco);
 
-        //salvar o endereco e depois salvar a pessoa de acordo com seu endereco
+        //salvar o endereco e depois salvar a pessoa de acordo com o seu endereco
         endereco = enderecoRepository.save(endereco);
         pessoaRepository.saveAll(endereco.getPessoas());
         return endereco;
