@@ -63,6 +63,18 @@ public class Endereco implements Serializable {
         return logradouro;
     }
 
+    public String getCep() {
+        return cep;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
     public TipoEndereco getTipoEndereco() {
         return tipoEndereco;
     }
