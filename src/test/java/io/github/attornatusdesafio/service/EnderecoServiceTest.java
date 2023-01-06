@@ -1,7 +1,6 @@
 package io.github.attornatusdesafio.service;
 
 import io.github.attornatusdesafio.dto.NewEnderecoDto;
-import io.github.attornatusdesafio.dto.UpdatePessoaDto;
 import io.github.attornatusdesafio.enums.TipoEndereco;
 import io.github.attornatusdesafio.model.Endereco;
 import io.github.attornatusdesafio.model.Pessoa;
@@ -47,9 +46,9 @@ class EnderecoServiceTest {
                 .thenReturn(Optional.of(CreateEnderecoTest.enderecoToBeCreated()));
     }
 
-    @DisplayName("sucesso quando retornar um endereco inserirod partir do idPessoa e NewEnderecoDto")
+    @DisplayName("Retorna um endereco inserido partir do idPessoa e NewEnderecoDto")
     @Test
-    void retornaEnderecoInseridoApartirIdPessoaENewEnderecoDto() {
+    void retornaEnderecoInseridoApartirIdPessoaENewEnderecoDto_sucesso() {
         Endereco enderecoEsperado = CreateEnderecoTest.enderecoToBeCreated();
 
         Endereco endereco = enderecoService.insertEndereco(1, new NewEnderecoDto());
@@ -62,9 +61,9 @@ class EnderecoServiceTest {
                 .doesNotThrowAnyException();
     }
 
-    @DisplayName("sucesso quando retornar uma pessoa partir do id da pessoa")
+    @DisplayName("Retorna uma pessoa partir do id da pessoa")
     @Test
-    void RetornaPessoaApartirDoIdPessoa_sucesso() {
+    void retornaPessoaApartirDoIdPessoa_sucesso() {
         String nomeEsperado = CreatePessoaTest.pessoaToBeCreated().getNome();
 
         Optional<Pessoa> entity = pessoaRepositoryMock.findById(1);
@@ -77,9 +76,9 @@ class EnderecoServiceTest {
 
     }
 
-    @DisplayName("sucesso quando retornar um erro que a pessoa não possui Id")
+    @DisplayName("Retorna IllegalArgumentException quando a pessoa não possui Id")
     @Test
-    void RetornaIllegalArgumentExceptionQuandoPessoaNaoPossuiId() {
+    void retornaIllegalArgumentExceptionQuandoPessoaNaoPossuiId_sucesso() {
         BDDMockito.when(pessoaRepositoryMock.findById(ArgumentMatchers.any()))
                 .thenReturn(Optional.empty());
 
@@ -87,7 +86,7 @@ class EnderecoServiceTest {
                         .isThrownBy(() -> enderecoService.defineMainEnderecoByPessoa(1,1));
     }
 
-    @DisplayName("sucesso quando retornar uma lista de enderecos a partir do id da pessoa")
+    @DisplayName("Retorna uma lista de enderecos a partir do id da pessoa")
     @Test
     void retornaUmaListaEnderecosApartirDoIdPessoa_sucesso() {
         String logradouroEsperado = CreateEnderecoTest.enderecoToBeCreated().getLogradouro();
@@ -101,10 +100,9 @@ class EnderecoServiceTest {
         Assertions.assertThat(enderecos.get(0).getLogradouro()).isEqualTo(logradouroEsperado);
     }
 
-    @DisplayName("sucesso quando definir um endereco como main a partir do idPessoa e idEndereco")
+    @DisplayName("Defini um endereco como main a partir do idPessoa e idEndereco")
     @Test
-    void
-    DefinirUmEnderecoComoMain_sucesso() {
+    void definiUmEnderecoComoMain_sucesso() {
         Endereco endereco = CreateEnderecoTest.enderecoToBeCreated();
         enderecoService.defineMainEnderecoByPessoa(1, endereco.getId());
         endereco.setTipoEndereco(TipoEndereco.PRINCIPAL);

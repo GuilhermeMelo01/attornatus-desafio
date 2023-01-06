@@ -43,7 +43,7 @@ class PessoaServiceTest {
                 .thenReturn(CreatePessoaTest.pessoaToBeCreated());
     }
 
-    @DisplayName("Sucesso quando retornar uma lista de pessoas")
+    @DisplayName("Retorna uma lista de pessoas")
     @Test
     void retornaListaPessoasQuandoTiverSucesso(){
         String nomeEsperado = CreatePessoaTest.pessoaToBeSaved().getNome();
@@ -57,7 +57,7 @@ class PessoaServiceTest {
         Assertions.assertThat(listaPessoas.get(0).getNome()).isEqualTo(nomeEsperado);
     }
 
-    @DisplayName("Sucesso quando retornar uma pessoa a partir do Id")
+    @DisplayName("Retorna uma pessoa a partir do Id")
     @Test
     void retornaPessoasPartirDoIdQuandoTiverSucesso(){
         Integer idEsperado = CreatePessoaTest.pessoaToBeCreated().getId();
@@ -71,9 +71,9 @@ class PessoaServiceTest {
         Assertions.assertThat(pessoa.getId()).isEqualTo(idEsperado);
     }
 
-    @DisplayName("Sucesso quando for criada uma pessoa")
+    @DisplayName("Insere uma pessoa a partir do NewPessoaDto")
     @Test
-    void CriaPessoaQuandoTiverSucesso(){
+    void criaPessoaQuandoTiverSucesso(){
         Pessoa pessoaEsperada = CreatePessoaTest.pessoaToBeCreated();
         Assertions.assertThatCode(() -> pessoaService.insert(new NewPessoaDto()))
                 .doesNotThrowAnyException();
@@ -85,9 +85,9 @@ class PessoaServiceTest {
                 .isEqualTo(pessoaEsperada);
     }
 
-    @DisplayName("Sucesso quando for atualizado com sucesso a partir do Id pessoa")
+    @DisplayName("Atualiza pessoa a partir do Id e UpdatePessoaDto")
     @Test
-    void AtualizaPessoaApartirDoIdQuandoTiverSucesso(){
+    void atualizaPessoaApartirDoIdQuandoTiverSucesso(){
         Assertions.assertThatCode(() -> pessoaService.update(1, new UpdatePessoaDto()))
                 .doesNotThrowAnyException();
     }

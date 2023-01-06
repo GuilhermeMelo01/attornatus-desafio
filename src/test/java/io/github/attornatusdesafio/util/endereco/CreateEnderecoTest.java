@@ -14,12 +14,4 @@ public class CreateEnderecoTest {
         return new Endereco(1,"Rua celso correia", "61611220",
                 "600", "Fortaleza", List.of(new Pessoa()));
     }
-
-    public static Endereco enderecoToBeUpdate(){
-        Endereco endereco = new Endereco("Rua celso correia", "61611220",
-                "600", "Fortaleza", List.of(new Pessoa()));
-        endereco.setTipoEndereco(TipoEndereco.PRINCIPAL);
-        return endereco;
-    }
-
 }

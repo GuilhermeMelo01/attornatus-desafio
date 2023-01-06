@@ -48,7 +48,7 @@ class EnderecoControllerTest {
                 .defineMainEnderecoByPessoa(ArgumentMatchers.any(), ArgumentMatchers.any());
     }
 
-    @DisplayName("Sucesso quando retornar uma lista de enderecos a partir do Id de pessoa")
+    @DisplayName("Retorna uma lista de enderecos a partir do Id de pessoa")
     @Test
     void retornaListaEnderecosApartirIdPessoaQuandoTiverSucesso(){
         String logradouroEsperado = CreateEnderecoTest.enderecoToBeCreated().getLogradouro();
@@ -62,7 +62,7 @@ class EnderecoControllerTest {
         Assertions.assertThat(listaEnderecos.get(0).getLogradouro()).isEqualTo(logradouroEsperado);
     }
 
-    @DisplayName("Sucesso quando inserir um endereco a partir do Id da pessoa")
+    @DisplayName("Insere um endereco a partir do Id da pessoa")
     @Test
     void criaEnderecosPartirDoIdPessoaQuandoTiverSucesso(){
         Assertions.assertThatCode(() -> enderecoController.insertEndereco(1, new NewEnderecoDto()))
@@ -76,9 +76,9 @@ class EnderecoControllerTest {
         Assertions.assertThat(entityEndereco.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
-    @DisplayName("Sucesso quando for definido o tipo de endereco para Main")
+    @DisplayName("Defini o tipo de endereco para Main")
     @Test
-    void AtualizaPessoaQuandoTiverSucesso(){
+    void atualizaPessoaQuandoTiverSucesso(){
 
         Assertions.assertThatCode(() -> enderecoServiceMock.defineMainEnderecoByPessoa(1, 1))
                 .doesNotThrowAnyException();
@@ -89,6 +89,4 @@ class EnderecoControllerTest {
 
         Assertions.assertThat(entityPessoa.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
-
-
 }

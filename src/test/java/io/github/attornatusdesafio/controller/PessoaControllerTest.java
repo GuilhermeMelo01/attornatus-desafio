@@ -1,7 +1,6 @@
 package io.github.attornatusdesafio.controller;
 
 import io.github.attornatusdesafio.dto.NewPessoaDto;
-import io.github.attornatusdesafio.dto.UpdatePessoaDto;
 import io.github.attornatusdesafio.model.Pessoa;
 import io.github.attornatusdesafio.service.PessoaService;
 import io.github.attornatusdesafio.util.pessoa.CreatePessoaTest;
@@ -13,16 +12,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.ArgumentMatchers;
+import org.mockito.BDDMockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.time.LocalDate;
 import java.util.List;
 
 
@@ -54,7 +53,7 @@ class PessoaControllerTest {
         BDDMockito.doNothing().when(pessoaServiceMock).update(ArgumentMatchers.any(), ArgumentMatchers.any());
     }
 
-    @DisplayName("Sucesso quando retornar uma lista de pessoas")
+    @DisplayName("Retorna uma lista de pessoas")
     @Test
     void retornaListaPessoasQuandoTiverSucesso(){
         String nomeEsperado = CreatePessoaTest.pessoaToBeSaved().getNome();
@@ -68,7 +67,7 @@ class PessoaControllerTest {
         Assertions.assertThat(listaPessoas.get(0).getNome()).isEqualTo(nomeEsperado);
     }
 
-    @DisplayName("Sucesso quando retornar uma pessoa a partir do ID")
+    @DisplayName("Retorna uma pessoa a partir do Id")
     @Test
     void retornaPessoasPartirDoIdQuandoTiverSucesso(){
         Integer idEsperado = CreatePessoaTest.pessoaToBeCreated().getId();
@@ -82,7 +81,7 @@ class PessoaControllerTest {
         Assertions.assertThat(pessoa.getId()).isEqualTo(idEsperado);
     }
 
-    @DisplayName("Sucesso quando for criada uma pessoa")
+    @DisplayName("Cria uma pessoa a partir do NewPessoaDto")
     @Test
     void CriaPessoaQuandoTiverSucesso(){
 
@@ -98,9 +97,9 @@ class PessoaControllerTest {
         Assertions.assertThat(entityPessoa.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 
-    @DisplayName("Sucesso quando pessoa for atualizada")
+    @DisplayName("Atualiza a pessoa a partir do Id e UpdatePessoaDto")
     @Test
-    void AtualizaPessoaQuandoTiverSucesso(){
+    void atualizaPessoaQuandoTiverSucesso(){
 
         Assertions.assertThatCode(() -> pessoaController.update(1,
                         PessoaPutDtoRequestBody.createdPessoaPutRequestBody()))
@@ -113,6 +112,4 @@ class PessoaControllerTest {
 
         Assertions.assertThat(entityPessoa.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
-
-
 }
