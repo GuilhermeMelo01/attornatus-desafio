@@ -85,12 +85,9 @@ class PessoaServiceTest {
                 .isEqualTo(pessoaEsperada);
     }
 
-
-    @DisplayName("Sucesso quando for atualizado com sucesso a partir de um Id pessoa")
+    @DisplayName("Sucesso quando for atualizado com sucesso a partir do Id pessoa")
     @Test
-    void AtualizaPessoaQuandoTiverSucesso(){
-        Pessoa pessoaEsperada = CreatePessoaTest.pessoaToBeCreated();
-
+    void AtualizaPessoaApartirDoIdQuandoTiverSucesso(){
         Assertions.assertThatCode(() -> pessoaService.update(1, new UpdatePessoaDto()))
                 .doesNotThrowAnyException();
     }

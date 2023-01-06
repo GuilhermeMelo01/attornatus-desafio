@@ -1,8 +1,6 @@
 package io.github.attornatusdesafio.util.pessoa;
 
-import io.github.attornatusdesafio.dto.NewPessoaDto;
 import io.github.attornatusdesafio.dto.UpdatePessoaDto;
-import org.hibernate.sql.Update;
 
 public class PessoaPutDtoRequestBody {
 

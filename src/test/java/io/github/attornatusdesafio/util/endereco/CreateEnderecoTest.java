@@ -9,6 +9,12 @@ import java.util.List;
 
 public class CreateEnderecoTest {
 
+
+    public static Endereco enderecoToBeCreated(){
+        return new Endereco(1,"Rua celso correia", "61611220",
+                "600", "Fortaleza", List.of(new Pessoa()));
+    }
+
     public static Endereco enderecoToBeUpdate(){
         Endereco endereco = new Endereco("Rua celso correia", "61611220",
                 "600", "Fortaleza", List.of(new Pessoa()));
@@ -16,8 +22,4 @@ public class CreateEnderecoTest {
         return endereco;
     }
 
-    public static Endereco enderecoToBeCreated(){
-        return new Endereco(1,"Rua celso correia", "61611220",
-                "600", "Fortaleza", List.of(new Pessoa()));
-    }
 }
