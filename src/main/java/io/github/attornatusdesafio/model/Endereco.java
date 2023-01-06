@@ -52,7 +52,6 @@ public class Endereco implements Serializable {
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
-        this.tipoEndereco = tipoEndereco;
         this.pessoas = pessoas;
     }
 
@@ -60,40 +59,8 @@ public class Endereco implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getLogradouro() {
         return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
     }
 
     public TipoEndereco getTipoEndereco() {
@@ -106,10 +73,6 @@ public class Endereco implements Serializable {
 
     public List<Pessoa> getPessoas() {
         return pessoas;
-    }
-
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
     }
 
     @Override

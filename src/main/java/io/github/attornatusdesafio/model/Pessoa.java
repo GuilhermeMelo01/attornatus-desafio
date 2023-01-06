@@ -45,10 +45,6 @@ public class Pessoa implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }
@@ -67,10 +63,6 @@ public class Pessoa implements Serializable {
 
     public List<Endereco> getEnderecos() {
         return enderecos;
-    }
-
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
     }
 
     @Override
